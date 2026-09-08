@@ -1,0 +1,31 @@
+{
+  "_readme": "The independent variable: the SET OF MODELS compared on the dgx (sglang/GB10) platform. Edit this to the models you actually serve. Each entry is the whole model bundle under test -- weights, quantization, its own vendor-recommended sampling, and its native context window (VISION.md: 'A model is compared as its out-of-the-box, best-native self'). 'id' is the short label used in trial ids and results grouping; 'served_model' is the id the server reports at /v1/models and the agent selects; 'model_path' is the checkpoint preflight verifies is live. sglang serves ONE model per instance, so run one model's batch at a time (make run-all MODEL=<id>) relaunching the server between them, or list only the currently-served model here. Omit a sampling key a model has no recommendation for. The first entry is the model compare-agents/compare-platform pinned; the rest are illustrative -- replace them.",
+  "models": [
+    {
+      "id": "qwen3-27b-nvfp4",
+      "served_model": "qwen3.8-27b-sglang",
+      "model_path": "RadixArk/Qwen3.8-27B-NVFP4",
+      "context_length": 262144,
+      "max_tokens": 32768,
+      "sampling": {
+        "temperature": 0.7,
+        "top_p": 0.8,
+        "top_k": 20,
+        "repetition_penalty": 1.05
+      }
+    },
+    {
+      "id": "example-14b",
+      "served_model": "example-14b-sglang",
+      "model_path": "vendor/Example-14B-NVFP4",
+      "context_length": 131072,
+      "max_tokens": 32768,
+      "sampling": {
+        "temperature": 0.6,
+        "top_p": 0.9,
+        "top_k": 40,
+        "repetition_penalty": 1.0
+      }
+    }
+  ]
+}

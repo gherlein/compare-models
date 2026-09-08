@@ -1,0 +1,6 @@
+REQUIREMENTS.md in this directory specifies a Go command-line tool. Implement it completely.
+
+Deliver the Go source, a test suite, and a Makefile with `build` and `test` targets.
+Run `make build` and `make test` yourself, and get both passing, before you finish.
+
+Do not modify REQUIREMENTS.md. Do not add third-party dependencies.
