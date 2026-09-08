@@ -1,18 +1,37 @@
 {
-  "_readme": "The independent variable: the SET OF MODELS compared on the local (Lemonade/llama.cpp, Strix Halo 'helios') platform. Fields per entry: 'id' (short label for trial ids/results), 'served_model' (the id Lemonade reports at /api/v1/models and the agent selects), 'model_path' (Lemonade's exact .checkpoint, verified live by serve_model), 'context_length', 'max_tokens', and the model's own vendor-recommended 'sampling'. The three chosen for the coding exercise: the Qwen3-Coder specialist, the Qwen3.8-27B lineage baseline (matches compare-agents/compare-platform), and the largest generalist Qwen3-Next-80B. Lemonade holds several installed models and loads on demand, so `make run-all TARGET=local` iterates the whole set. Sampling values coincide because all three are Qwen3 non-thinking/instruct (Qwen's recommendation: temp 0.7, top_p 0.8, top_k 20, repetition_penalty 1.05).",
+  "_readme": "Model set compared on the local (Lemonade/llama.cpp, Strix Halo 'helios') platform. Ordered small->large so quick runs come first and the slow 80B is last (run-all iterates in this order). id = short label; served_model = the id Lemonade reports at /api/v1/models; model_path = Lemonade's exact .checkpoint (serve_model verifies it live); sampling = each model's own vendor recommendation. All the Qwen3 instruct/non-thinking models share Qwen's recommended sampling (0.7/0.8/20/1.05); deepseek-qwen3-8b is an R1 distill (a thinking model), so it uses DeepSeek's recommendation (temp 0.6, top_p 0.95). Qwen3-Coder-30B-A3B was removed from the set: this llama.cpp build does not parse its <function=...> tool-call format into OpenAI tool_calls (confirmed via a raw-API probe), so no agent can drive it here -- a serving limitation, not a coding-ability result.",
   "models": [
     {
-      "id": "qwen3-coder-30b-a3b",
-      "served_model": "Qwen3-Coder-30B-A3B-Instruct-GGUF",
-      "model_path": "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF:Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf",
+      "id": "deepseek-qwen3-8b",
+      "served_model": "DeepSeek-Qwen3-8B-GGUF",
+      "model_path": "unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_1",
+      "context_length": 131072,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.6, "top_p": 0.95 }
+    },
+    {
+      "id": "qwen3.5-9b",
+      "served_model": "Qwen3.5-9B-GGUF",
+      "model_path": "unsloth/Qwen3.5-9B-GGUF:Qwen3.5-9B-UD-Q4_K_XL.gguf",
       "context_length": 262144,
       "max_tokens": 32768,
-      "sampling": {
-        "temperature": 0.7,
-        "top_p": 0.8,
-        "top_k": 20,
-        "repetition_penalty": 1.05
-      }
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
+    },
+    {
+      "id": "qwen3-14b",
+      "served_model": "Qwen3-14B-GGUF",
+      "model_path": "unsloth/Qwen3-14B-GGUF:Q4_0",
+      "context_length": 40960,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
+    },
+    {
+      "id": "qwen3-30b-a3b",
+      "served_model": "Qwen3-30B-A3B-GGUF",
+      "model_path": "unsloth/Qwen3-30B-A3B-GGUF:Q4_0",
+      "context_length": 40960,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
     },
     {
       "id": "qwen3.8-27b",
@@ -20,12 +39,23 @@
       "model_path": "unsloth/Qwen3.8-27B-GGUF:Qwen3.8-27B-UD-Q4_K_XL.gguf",
       "context_length": 262144,
       "max_tokens": 32768,
-      "sampling": {
-        "temperature": 0.7,
-        "top_p": 0.8,
-        "top_k": 20,
-        "repetition_penalty": 1.05
-      }
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
+    },
+    {
+      "id": "qwen3.5-35b-a3b",
+      "served_model": "Qwen3.5-35B-A3B-GGUF",
+      "model_path": "unsloth/Qwen3.5-35B-A3B-GGUF:Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf",
+      "context_length": 262144,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
+    },
+    {
+      "id": "qwen3.6-35b-a3b-mtp",
+      "served_model": "Qwen3.6-35B-A3B-MTP-GGUF",
+      "model_path": "unsloth/Qwen3.6-35B-A3B-MTP-GGUF:Qwen3.6-35B-A3B-UD-Q4_K_XL.gguf",
+      "context_length": 262144,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
     },
     {
       "id": "qwen3-next-80b-a3b",
@@ -33,12 +63,7 @@
       "model_path": "unsloth/Qwen3-Next-80B-A3B-Instruct-GGUF:Qwen3-Next-80B-A3B-Instruct-UD-Q4_K_XL.gguf",
       "context_length": 262144,
       "max_tokens": 32768,
-      "sampling": {
-        "temperature": 0.7,
-        "top_p": 0.8,
-        "top_k": 20,
-        "repetition_penalty": 1.05
-      }
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
     }
   ]
 }

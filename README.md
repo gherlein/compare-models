@@ -129,17 +129,17 @@ sequenceDiagram
     participant S as Platform (serving model M)
     participant K as Anchor scorer
 
-    D->>D: verify model M is served; render M's agent config (its own sampling)
-    D->>D: fresh workspace with frozen REQUIREMENTS.md (clock starts)
-    D->>A: launch non-interactive, external timeout
+    D->>D: verify model M is served, render M's config with its own sampling
+    D->>D: fresh workspace with frozen REQUIREMENTS.md, clock starts
+    D->>A: launch non-interactive with external timeout
     loop agent turns
         A->>S: inference requests to model M
-        A->>A: edit / build / test in workspace
+        A->>A: edit, build, test in workspace
     end
-    A->>D: self-terminates or is killed at the cap (clock stops)
-    D->>D: make build / make test in the workspace
+    A->>D: self-terminates or is killed at the cap, clock stops
+    D->>D: make build and make test in the workspace
     D->>K: run frozen 32-case suite against the produced binary
-    D->>D: meta.json + telemetry.json + rendered config + archived tree
+    D->>D: write meta.json, telemetry.json, rendered config, archived tree
 ```
 
 The clock covers only the agent's run. Build, test, and scoring happen after it
