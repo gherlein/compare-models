@@ -42,6 +42,24 @@
       "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 }
     },
     {
+      "id": "qwen3.8-27b-think",
+      "served_model": "Qwen3.8-27B-GGUF",
+      "model_path": "unsloth/Qwen3.8-27B-GGUF:Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "context_length": 262144,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 },
+      "extra_body": { "chat_template_kwargs": { "enable_thinking": true } }
+    },
+    {
+      "id": "qwen3.8-27b-nothink",
+      "served_model": "Qwen3.8-27B-GGUF",
+      "model_path": "unsloth/Qwen3.8-27B-GGUF:Qwen3.8-27B-UD-Q4_K_XL.gguf",
+      "context_length": 262144,
+      "max_tokens": 32768,
+      "sampling": { "temperature": 0.7, "top_p": 0.8, "top_k": 20, "repetition_penalty": 1.05 },
+      "extra_body": { "chat_template_kwargs": { "enable_thinking": false } }
+    },
+    {
       "id": "qwen3.5-35b-a3b",
       "served_model": "Qwen3.5-35B-A3B-GGUF",
       "model_path": "unsloth/Qwen3.5-35B-A3B-GGUF:Qwen3.5-35B-A3B-UD-Q4_K_XL.gguf",

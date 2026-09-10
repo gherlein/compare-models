@@ -165,6 +165,11 @@ def render_hax(entry: dict, base_url: str, provider: str, api_key: str) -> dict[
                      ("repetition_penalty", "repetition_penalty")):
         if src in s:
             extra_body[dst] = s[src]
+    # Optional per-model request passthrough, merged verbatim into the request
+    # body via extra_body -- e.g. {"chat_template_kwargs": {"enable_thinking":
+    # false}} to toggle Qwen3 thinking. Part of the model bundle, recorded in
+    # models.json and the archived config.
+    extra_body.update(entry.get("extra_body", {}))
     # hax config is pure JSON (no comments). It pins the bench provider to the
     # platform URL, the served model and its context window, disables the
     # models.dev catalog fetch (no network beyond inference), sets a 15m idle
